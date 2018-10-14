@@ -1,0 +1,29 @@
+本月学习了《Python机器学习实践指南》
+特别是其中关于经典数据分析、飞机票、IPO、聚类的章节。
+据此提出了跨行通通道质量可视化的新员工创新课题。
+同时，本次还练习了定义Python类【Basket.py】、写了计算贷款利率的脚本【ma.py】。
+
+【1.环境准备】
+  下载
+https://www.anaconda.com/download/#macos
+https://www.anaconda.com/download/#windows
+  已备份到【百度云盘-软件安装包-01.编程工具-Python-苹果电脑-Anaconda2-5.0.1-MacOSX-x86_64.pkg】  
+
+【2.数据集合】
+经典机器学习数据集
+http://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data
+[../data/isis/iris.data]
+
+安斯库姆四重奏
+https://en.wikipedia.org/wiki/Anscombe%27s_quartet
+
+飞机票信息
+https://www.google.com/flights#flt=JFK,EWR,LGA.HND,NRT,TPE,HKG,KIX.2018-08-15;c:USD;e:1;sd:1;t:f;tt:o
+
+IPO数据
+https://www.iposcoop.com/scoop-track-record-from-2000-to-present/
+[..data/ipodata/SCOOP-Rating-Performance.xls]
+
+S&P 500
+https://finance.yahoo.com/quote/%5EGSPC/history?ltr=1
+[..data/ipodata/spy.csv]
