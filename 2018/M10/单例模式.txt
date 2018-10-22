@@ -1,0 +1,8 @@
+参考
+https://mp.weixin.qq.com/s?__biz=MzI2NjA3NTc4Ng==&mid=2652079819&idx=1&sn=9aff561b9d2c577a585c4d5bd60d0b36&chksm=f1748d2ec6030438ce41c0511266db4b796ce84373d7495bef08c0e1cb318febb533b4aa18aa&scene=27#wechat_redirect
+
+
+1.双重锁检测
+2.静态内部类
+3.枚举
+
