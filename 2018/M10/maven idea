@@ -1,0 +1,11 @@
+1.Maven安装与配置
+https://www.cnblogs.com/eagle6688/p/7838224.html
+D:\Program Files\Apache\maven\conf\settings.xml文件
+
+<localRepository>/path/to/local/repo</localRepository>
+localRepository节点默认是被注释掉的，需要把它移到注释之外，然后将localRepository节点的值改为我们在3.1中创建的目录D:\Program Files\Apache\maven-repository。
+
+2.
+用idea创建java项目，并添加maven管理
+https://blog.csdn.net/xyh930929/article/details/78936611
+选中项目——>右键——>选择Add Framworks Support——>选择maven
