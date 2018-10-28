@@ -1,0 +1,35 @@
+今天在测试新装的MYSQL的特性。
+特别关注了关于时区这一块。
+
+遇到一些匪夷所思的情况。想办法搞搞清楚。
+系统表现是：通过JAVA写入时间戳，到mysql记录的，成为了八小时以前。
+      pstmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+
+“参考http://www.jspkongjian.net/news.jsp?id=906
+关于mysql插入timeStamp类型数据时间相差8小时的解决办法
+第一种方法不可以用，改为配置文件的方法
+/etc/my.cnf增加一行
+default-time_zone = '+8:00'
+然后重启mysql服务”
+
+开始以为是这个问题，然后加上后，问题更加奇怪了。变成了4小时以后。
+尝试从原理层面理解这个问题。
+
+1.System.currentTimeMillis()返回UTC时间,上面那种写法，数据库记录的是这个时间。
+2.操作系统根据UTC时间、设定的时区，决定展示的时间样式。
+这里我们要有一种UTC为标准的概念。
+A。编写本文时的时间是Sun Oct 28 16:29:09 CST 2018。
+B。那么UTC时间就是2018/10/28 08:29:09
+真实的事情是：B+本机器在中国（东八区），因此展示A。
+
+3.查看数据库所在服务器的时区
+https://www.cnblogs.com/baby123/p/6092438.html
+date +"%Z %z"
+EDT -0400
+发现数据库服务器在西四区。
+
+目前这种写法，JAVA所在服务器会将UTC时间传入数据库，数据库直接写入。因此无论如何，都是UTC时间，而不能显示东八区时间。
+需要调整一下程序的写法，
+String INSERT_SQL = "insert into log values(now(),?,?)";
+然后数据库会根据配置文件设定的时区记录。
+当修改配置文件，重启后已经发生的会整体平移。例如修改前的记录是东八区16:01:01，改为东九区后会自动调整为17:01:01。

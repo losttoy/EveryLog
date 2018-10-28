@@ -1,0 +1,34 @@
+---------------------------
+20181028改路径
+/usr/local/tomcat
+---------------------------
+---------------------------
+20181013改成绿色版
+/root/tomcat/apache-tomcat-8.5.34
+---------------------------
+
+1.安装tomcat,改80端口[后来没改]
+https://www.cnblogs.com/hwaggLee/p/4639270.html
+安装位置
+/etc/tomcat
+主程序/软件存放webapp位置
+/var/lib/tomcat/webapps
+日志记录位置
+/var/log/tomcat
+在Centos使用yum安装后，Tomcat相关的目录都已采用符号链接到/usr/share/tomcat目录，包含webapps等，这很方便我们配置管理
+/usr/share/tomcat
+
+2.开机启动
+[root@host ~]# chkconfig tomcat on
+
+3.防火墙使用
+http://blog.51cto.com/liqingbiao/1917393
+关闭防火墙
+ service firewalld stop
+
+4.无法启动80端口
+https://blog.csdn.net/w2_pan0125/article/details/79830225
+
+增加端口重定向
+https://blog.csdn.net/lhl6688/article/details/43481991
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
