@@ -1,0 +1,25 @@
+【参考文章】
+1.mysql 用户及权限管理 小结
+https://www.cnblogs.com/SQL888/p/5748824.html
+2.MySQL8.0设置远程访问权限
+https://blog.csdn.net/xinpengfei521/article/details/80403965
+3.Can 't connect to local MySQL server through socket
+https://blog.csdn.net/hjf161105/article/details/78850658
+4.mysql用户权限设置
+http://www.cnblogs.com/candle806/p/4048651.html
+
+【步骤】
+mysql -uroot -h 127.0.0.1 -p
+这里用安装时记录的临时密码
+use mysql;
+select host, user, authentication_string, plugin from user;
+新增用户，用传统方式的加密方式
+CREATE USER testuser IDENTIFIED BY 'password';
+ALTER USER 'testuser'@'%' IDENTIFIED WITH mysql_native_password BY 'password' PASSWORD EXPIRE NEVER; 
+
+CREATE USER testuser2 IDENTIFIED BY 'password';
+ALTER USER 'testuser2'@'%' IDENTIFIED WITH mysql_native_password BY 'password' PASSWORD EXPIRE NEVER; 
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password' PASSWORD EXPIRE NEVER; 
+
+FLUSH PRIVILEGES;

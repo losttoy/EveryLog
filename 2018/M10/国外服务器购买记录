@@ -1,0 +1,101 @@
+【1.指导文章】
+http://dapeng.cf(打不开了)
+http://dapeng.cf/2018/216.html(打不开了)
+https://blog.sharkyzh.cn/post/50d46b4d.html
+
+【2.下单记录、机器密码】
+VPS购买管理
+https://bwh1.net
+Your Order Number is: 4036061930
+Physical Location: US, California    Node ID: v776    VPS ID: 1049198
+IP address: 67.209.176.219
+SSH Port: 26155
+
+服务器密码
+root/zhuwei666
+
+【3.安装系统、重置密码】
+Install new OS
+Operating system is currently being reinstalled, and it can take up to 15 minutes to complete.
+Once finished, you will receive an e-mail notification at zw_zjut@163.com 
+You will need a new root password to access your VPS: ErkY6rJjo4e8
+New SSH Port: 26155
+
+【4.安装代理，每次重新安装服务器信息都会改】
+一键安装代理
+curl -O https://raw.githubusercontent.com/yobabyshark/proV/master/config_v2ray.sh && chmod +x config_v2ray.sh && ./config_v2ray.sh
+2018-07-29 01:38:03 (467 MB/s) - ‘config.json’ saved [1595/1595]
+安装已经完成，开启了kcp和tcp两种模式，客户端可任意选择对应的配置
+[root@host ~]# cat /proc/sys/kernel/random/uuid 
+d834d811-1e11-4eae-93ad-5b7b5278a07e
+[root@host ~]# cat /proc/sys/kernel/random/uuid 
+9b521acf-8dc1-4ad4-8c9c-33d81a50cab2
+[root@host ~]# 
+[root@host ~]# cat /proc/sys/kernel/random/uuid 
+341b2393-b94a-40a1-ad59-784965d7955a
+
+
+===========KCP配置=============
+地址：67.209.176.219
+端口：19083
+uuid：64ba0b40-fb9a-4b56-9d6d-59bb9f6ec2f6
+额外id：64
+加密方式：aes-128-gcm
+传输协议：kcp
+别名：mykcp
+伪装类型：srtp
+
+===========TCP配置=============
+地址：67.209.176.219
+端口：19083
+uuid：c93a7c76-795d-4561-a7f9-da9175bdb200
+额外id：64
+加密方式：aes-128-gcm
+传输协议：tcp
+别名：mytcp
+伪装类型：http
+伪装域名：bing.com
+
+【5.客户端软件】
+来自【http://dapeng.cf/2018/216.html】【三、客户端使用】
+里面有详细的客户端配置说明
+同时已备份在百度网盘【软件安装包】/【18.联网工具】
+
+5.1OSX需要额外配置
+Config-transport setting-tcp-customeize http-header
+【https://v2ray.com/chapter_02/transport/tcp.html】
+需要改成【HTTP 伪装配置】
+----------------------------------------
+{
+  "type": "http",
+  "request": {
+    "version": "1.1",
+    "method": "GET",
+    "path": ["/"],
+    "headers": {
+      "Host": ["www.baidu.com", "www.bing.com"],
+      "User-Agent": [
+        "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_2 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) CriOS/53.0.2785.109 Mobile/14A456 Safari/601.1.46"
+      ],
+      "Accept-Encoding": ["gzip, deflate"],
+      "Connection": ["keep-alive"],
+      "Pragma": "no-cache"
+    }
+  },
+  "response": {
+    "version": "1.1",
+    "status": "200",
+    "reason": "OK",
+    "headers": {
+      "Content-Type": ["application/octet-stream", "video/mpeg"],
+      "Transfer-Encoding": ["chunked"],
+      "Connection": ["keep-alive"],
+      "Pragma": "no-cache"
+    }
+  }
+}
+----------------------------------------
+
+20181027重装电脑后不能用了。
+要安装.NET FRAMEWORK

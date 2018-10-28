@@ -1,0 +1,5 @@
+https://jingyan.baidu.com/article/1876c8526457fa890b1376f3.html
+
+CentOS7在默认安装时，没有安装lsb_release。现在安装一下
+命令：
+yum -y install redhat-lsb

@@ -11,3 +11,5 @@ https://www.cnblogs.com/wqpkita/p/7124930.html
 Python 异常处理
 http://www.runoob.com/python/python-exceptions.html
 
+后台运行
+nohup python CreditHttpHandler.py &
