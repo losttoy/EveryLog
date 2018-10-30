@@ -1,0 +1,41 @@
+linux搭建sftp服务器 2017/6/22+2018/10/28
+【参考文章】
+1.linux搭建sftp服务器
+http://blog.csdn.net/superswordsman/article/details/49331539
+2.sftp服务限制用户登录家目录
+https://my.oschina.net/davehe/blog/100280
+
+【步骤】
+1.主要报错原因
+[root@localhost ~]# tail -f  /var/log/secure
+Jun 22 19:57:59 localhost sshd[2693]: fatal: bad ownership or modes for chroot directory "/home/sftpuser" [postauth]
+Jun 22 19:57:59 localhost sshd[2693]: pam_unix(sshd:session): session closed for user sftpuser
+ChrootDirectory设置的目录权限及其所有的上级文件夹权限，属主和属组必须是root；
+ChrootDirectory设置的目录权限及其所有的上级文件夹权限，只有属主能拥有写权限，权限最大设置只能是755。
+这里存在一个悖论。既然上层目录owner和group必须是root，说明新建的用户不会有在目录下新建文件的权限（依赖目录的w权限）
+采取折中的办法，在目录下新建data，用户对他有权限。
+
+2.基本配置
+groupadd sftpgroup
+mkdir sftp
+chmod 755 sftp
+----------------------------------vi /etc/ssh/sshd_config（增加chroot控制）
+#限制sftp组的用户使用sftp时在自己的home目录下
+Match Group sftpgroup
+       #这里写重写根目录成登录用户的根目录下
+       ChrootDirectory %h
+       #这行指定使用sftp服务使用系统自带的internal-sftp
+       ForceCommand    internal-sftp
+----------------------------------
+
+3.新增用户脚本
+----------------------------------addsftpuser.sh
+#!/bin/bash
+# USE LIKE THIS:[sh addsftpuser.sh sftpuser]
+useradd -g sftpgroup -d /home/sftp/$1 -s /sbin/nologin $1
+echo awsedrft1! | passwd $1 --stdin
+chown root:root /home/sftp/$1
+chmod 755 /home/sftp/$1
+mkdir /home/sftp/$1/data
+chown $1:sftpgroup /home/sftp/$1/data
+----------------------------------
